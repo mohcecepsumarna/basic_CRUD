@@ -5,7 +5,7 @@ include 'koneksi.php';
     //membuat variable untuk menampung data dari form
     $id = $_POST['id'];
     $nama_produk    = $_POST['nama_produk'];
-    $deskripsi      = $_POST['deskripis'];
+    $deskripsi      = $_POST['deskripsi'];
     $harga_beli     = $_POST['harga_beli'];
     $harga_jual     = $_POST['harga_jual'];
     $gambar_produk  = $_FILES['gambar_produk']['name'];

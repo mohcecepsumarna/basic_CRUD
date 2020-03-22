@@ -1,41 +1,36 @@
 <?php
-//memanggil file koneksi.php untuk membuat koneksi
+  // memanggil file koneksi.php untuk membuat koneksi
 include 'koneksi.php';
-//mengecek apakah di url ada nilai GET id 
-if(isset($_GET['id'])){
-    //mengambil nilai id dari url dan disimpand dalam varibel $id
-    $id = ($_GET['id']);
-}
 
-//Menampilkan data dari database yang mempunyai id=$id
-$query = "SELECT * FROM produk WHERE id='$id'";
-$result = mysqli_query($koneksi, $query);
-//jika data gagal diambil maka akan tampil pesan error berikut 
-if(!$result){
-    die("Query Error: ".mysqli_error($koneksi).
-    " _ ".mysqli_error($koneksi)); 
-}
-//mengambil data dari database
-$data = mysqli_fetch_assoc($result);
-//apabila data tidak ada GET id maka di jalankan perintah ini
-if(!count($data)){
-    echo "<script> alert('Data tidak ditemukan pada database');window.location='index.php';</scirpt>";
+  // mengecek apakah di url ada nilai GET id
+  if (isset($_GET['id'])) {
+    // ambil nilai id dari url dan disimpan dalam variabel $id
+    $id = ($_GET["id"]);
 
-} else {
-    //apapbila tidak ada data GET id maka akan di redirect ke index.php
-    echo "<script> alert('Masukkan data id.');window.location='index.php';</script>";
-}
-
-?>
+    // menampilkan data dari database yang mempunyai id=$id
+    $query = "SELECT * FROM produk WHERE id='$id'";
+    $result = mysqli_query($koneksi, $query);
+    // jika data gagal diambil maka akan tampil error berikut
+    if(!$result){
+      die ("Query Error: ".mysqli_errno($koneksi).
+         " - ".mysqli_error($koneksi));
+    }
+    // mengambil data dari database
+    $data = mysqli_fetch_assoc($result);
+      // apabila data tidak ada pada database maka akan dijalankan perintah ini
+       if (!count($data)) {
+          echo "<script>alert('Data tidak ditemukan pada database');window.location='index.php';</script>";
+       }
+  } else {
+    // apabila tidak ada data GET id pada akan di redirect ke index.php
+    echo "<script>alert('Masukkan data id.');window.location='index.php';</script>";
+  }         
+  ?>
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Produk</title>
-</head>
-<title>Produk dengan gambar</title>
-<style type="text/css">
+<html>
+  <head>
+    <title>CRUD Produk dengan gambar - Gilacoding</title>
+    <style type="text/css">
       * {
         font-family: "Trebuchet MS";
       }
@@ -79,41 +74,41 @@ if(!count($data)){
       background: #ededed;
     }
     </style>
-<body>
-    <center>
-        <h1>Edit Produk <?php echo $data['nama_produk'];  ?></h1>
-    </center>
-    <form method="POST" action="proses_edit.php" enctype="multipart/form-data">
-<section class="base">
-    <!-- menampung nilai id produk yang akan di edit  -->
-<input name="id" value="<?php echo $data['id']; ?>" hidden/>
-<div>
-    <label>Nama Produk</label>
-    <input type="text" name="nama_produk" value="<?php echo $data['nama_produk']; ?>" autofocus="" required="" />
-</div>
-<div>
-    <label>Deskripsi</label>
-    <input type="text" name="deskripi" value="<?php echo $data['deskripsi']; ?>" />
-</div>
-<div>
-    <label>Harga Beli</label>
-    <input type="text" name="harga_beli" required="" value="<?php echo $data['harga_beli']; ?>" />
-</div>
-<div>
-    <label>Harga Jual</label>
-    <input type="text" name="harga_jual" required="" value="<?php echo $data['harga_jual'];?>" />
-</div>
-<div>
-    <label> Gambar Produk</label>
-    <img src="gambar/<?php echo $data['gambar_produk']; ?>" style="width: 120px;float:left;margin-bottom: 5px;">
-    <input type="file" name="gambar+produk" />
-    <i style="float: left;font-size: 11px; color: red">Abaikan jika tidak merubah gambar produk</i>
-</div>
-<div>
-    <button type="submit">Simpan Perubahan</button>
-</div>
-</section>
-
-</form>
-</body>
+  </head>
+  <body>
+      <center>
+        <h1>Edit Produk <?php echo $data['nama_produk']; ?></h1>
+      <center>
+      <form method="POST" action="proses_edit.php" enctype="multipart/form-data" >
+      <section class="base">
+        <!-- menampung nilai id produk yang akan di edit -->
+        <input name="id" value="<?php echo $data['id']; ?>"  hidden />
+        <div>
+          <label>Nama Produk</label>
+          <input type="text" name="nama_produk" value="<?php echo $data['nama_produk']; ?>" autofocus="" required="" />
+        </div>
+        <div>
+          <label>Deskripsi</label>
+         <input type="text" name="deskripsi" value="<?php echo $data['deskripsi']; ?>" />
+        </div>
+        <div>
+          <label>Harga Beli</label>
+         <input type="text" name="harga_beli" required=""value="<?php echo $data['harga_beli']; ?>" />
+        </div>
+        <div>
+          <label>Harga Jual</label>
+         <input type="text" name="harga_jual" required="" value="<?php echo $data['harga_jual']; ?>"/>
+        </div>
+        <div>
+          <label>Gambar Produk</label>
+          <img src="gambar/<?php echo $data['gambar_produk']; ?>" style="width: 120px;float: left;margin-bottom: 5px;">
+          <input type="file" name="gambar_produk" />
+          <i style="float: left;font-size: 11px;color: red">Abaikan jika tidak merubah gambar produk</i>
+        </div>
+        <div>
+         <button type="submit">Simpan Perubahan</button>
+        </div>
+        </section>
+      </form>
+  </body>
 </html>

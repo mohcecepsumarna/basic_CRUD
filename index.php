@@ -6,7 +6,7 @@
     <html>
 
     <head>
-        <title>CRUD Produk dengan gambar - Gilacoding</title>
+        <title>CRUD Produk dengan gambar</title>
         <style type="text/css">
             * {
                 font-family: "Trebuchet MS";
@@ -72,7 +72,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
+     <?php
       // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
       $query = "SELECT * FROM produk ORDER BY id ASC";
       $result = mysqli_query($koneksi, $query);
@@ -82,7 +82,7 @@
            " - ".mysqli_error($koneksi));
       }
 
-      //buat perulangan untuk element tabel dari data mahasiswa
+      //buat perulangan untuk element tabel dari data produk
       $no = 1; //variabel untuk membuat nomor urut
       // hasil query akan disimpan dalam variabel $data dalam bentuk array
       // kemudian dicetak dengan perulangan while
@@ -111,12 +111,11 @@
                                         </td>
                                     </tr>
 
-                                    <?php
+        <?php
         $no++; //untuk nomor urut terus bertambah 1
       }
       ?>
-                            </tbody>
-                        </table>
-    </body>
-
-    </html>
+        </tbody>
+    </table>
+</body>
+</html>

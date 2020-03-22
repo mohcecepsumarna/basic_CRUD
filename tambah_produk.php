@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CRUD Produk dengan gambar - Gilacoding</title>
+    <title>CRUD Produk dengan gambar</title>
     <style type="text/css">
       * {
         font-family: "Trebuchet MS";

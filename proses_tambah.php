@@ -35,7 +35,7 @@ if($gambar_produk != "") {
 
             } else {     
              //jika file ekstensi tidak jpg dan png maka alert ini yang tampil
-                echo "<script>alert('Ekstensi gambar yang boleh hanya jpg atau png.');window.location='tambah_produk.php';</script>";
+                echo "<script>alert('Ekstensi gambar yang boleh hanya jpg atau png serta jpeg.');window.location='tambah_produk.php';</script>";
             }
 } else {
    $query = "INSERT INTO produk (nama_produk, deskripsi, harga_beli, harga_jual, gambar_produk) VALUES ('$nama_produk', '$deskripsi', '$harga_beli', '$harga_jual', null)";

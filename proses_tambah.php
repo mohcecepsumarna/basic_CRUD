@@ -12,14 +12,14 @@ include 'koneksi.php';
 
 //cek dulu jika ada gambar produk jalankan coding ini
 if($gambar_produk != "") {
-  $ekstensi_diperbolehkan = array('png','jpg'); //ekstensi file gambar yang bisa diupload 
+  $ekstensi_diperbolehkan = array('png','jpg','jpeg'); //ekstensi file gambar yang bisa diupload 
   $x = explode('.', $gambar_produk); //memisahkan nama file dengan ekstensi yang diupload
   $ekstensi = strtolower(end($x));
-  $file_tmp = $_FILES['gambar_produk']['tmp_name'];   
+  $tmp_name = $_FILES['gambar_produk']['tmp_name'];   
   $angka_acak     = rand(1,999);
   $nama_gambar_baru = $angka_acak.'-'.$gambar_produk; //menggabungkan angka acak dengan nama file sebenarnya
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)  {     
-                move_uploaded_file($file_tmp, 'gambar/'.$nama_gambar_baru); //memindah file gambar ke folder gambar
+                move_uploaded_file($tmp_name, 'gambar/'.$nama_gambar_baru); //memindah file gambar ke folder gambar
                   // jalankan query INSERT untuk menambah data ke database pastikan sesuai urutan (id tidak perlu karena dibikin otomatis)
                   $query = "INSERT INTO produk (nama_produk, deskripsi, harga_beli, harga_jual, gambar_produk) VALUES ('$nama_produk', '$deskripsi', '$harga_beli', '$harga_jual', '$nama_gambar_baru')";
                   $result = mysqli_query($koneksi, $query);

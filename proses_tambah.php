@@ -7,7 +7,7 @@ include 'koneksi.php';
   $deskripsi     = $_POST['deskripsi'];
   $harga_beli    = $_POST['harga_beli'];
   $harga_jual    = $_POST['harga_jual'];
-  $gambar_produk = $_FILES['gambar_produk']['name'];
+  $gambar_produk = $_FILES['gambar_produk']['tmp_name'];
 
 
 //cek dulu jika ada gambar produk jalankan coding ini

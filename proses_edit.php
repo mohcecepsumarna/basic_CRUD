@@ -8,20 +8,20 @@ include 'koneksi.php';
   $deskripsi     = $_POST['deskripsi'];
   $harga_beli    = $_POST['harga_beli'];
   $harga_jual    = $_POST['harga_jual'];
-  $gambar_produk = $_FILES['gambar_produk']['name'];
+  $gambar_produk = $_FILES['gambar']['tmp_name'];
   //cek dulu jika merubah gambar produk jalankan coding ini
   if($gambar_produk != "") {
-    $ekstensi_diperbolehkan = array('png','jpg'); //ekstensi file gambar yang bisa diupload 
+    $ekstensi_diperbolehkan = array('png','jpg','jpeg'); //ekstensi file gambar yang bisa diupload 
     $x = explode('.', $gambar_produk); //memisahkan nama file dengan ekstensi yang diupload
     $ekstensi = strtolower(end($x));
-    $file_tmp = $_FILES['gambar_produk']['tmp_name'];   
+    $file_tmp = $_FILES['gambar']['tmp_name'];   
     $angka_acak     = rand(1,999);
     $nama_gambar_baru = $angka_acak.'-'.$gambar_produk; //menggabungkan angka acak dengan nama file sebenarnya
     if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)  {
-                  move_uploaded_file($file_tmp, 'gambar/'.$nama_gambar_baru); //memindah file gambar ke folder gambar
+                  move_uploaded_file($file_tmp, 'gambar/'.$gambar_produk); //memindah file gambar ke folder gambar
                       
                     // jalankan query UPDATE berdasarkan ID yang produknya kita edit
-                   $query  = "UPDATE produk SET nama_produk = '$nama_produk', deskripsi = '$deskripsi', harga_beli = '$harga_beli', harga_jual = '$harga_jual', gambar_produk = '$nama_gambar_baru'";
+                   $query  = "UPDATE produk SET nama_produk = '$nama_produk', deskripsi = '$deskripsi', harga_beli = '$harga_beli', harga_jual = '$harga_jual', gambar = '$nama_gambar_baru'";
                     $query .= "WHERE id = '$id'";
                     $result = mysqli_query($koneksi, $query);
                     // periska query apakah ada error
@@ -52,5 +52,5 @@ include 'koneksi.php';
           echo "<script>alert('Data berhasil diubah.');window.location='index.php';</script>";
       }
     }
-
+?>
  
